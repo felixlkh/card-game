@@ -1,0 +1,348 @@
+// SASS variables
+$opacityTransition: opacity 200ms;
+$mqLandscape: "all and (max-height: 720px) and (orientation: landscape)";
+
+.page-wrapper {
+  background: rgb(41, 47, 60);
+  background: linear-gradient(to left, #4155b3 50%, #c34875 50%);
+  //background: linear-gradient(144deg, rgba(41, 47, 60, 1) 0%, rgba(41, 72, 107, 1) 46%, rgba(20, 19, 57, 1) 100%);
+  padding: 50px 60px 80px 60px;
+  border-radius: 20px;
+  position: relative;
+  min-height: 400px;
+  box-shadow: #00000075 0px 1px 13px 0px;
+
+  @media #{$mqLandscape} {
+    & {
+      width: 40%;
+    }
+  }
+
+}
+
+#title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 28px;
+  letter-spacing: 5px;
+  margin-bottom: 30px;
+}
+
+.deck-wrapper {
+  z-index: 2;
+  position: relative;
+  transition: $opacityTransition, transform 100ms ease-out;
+
+  @media #{$mqLandscape} {
+    & {
+      width: 100%;
+    }
+  }
+  // Game over, when entire deck is "picked up"
+  &_up {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+
+//Card
+
+.card {
+  text-align: center;
+  width: 100%;
+  backface-visibility: hidden;
+  transition: transform 200ms ease-in;
+
+  img {
+    width: 100%;
+  }
+
+  &__wrapper {
+    color: black;
+    padding-top: 140%;
+    position: relative;
+    background: #2c2c2c;
+    border-radius: 5%;
+    box-shadow: 0 0 3px #666;
+    opacity: 1;
+    transform: scale(1);
+    transition: transform 300ms, $opacityTransition;
+  }
+
+
+  &__face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 5% 5%;
+    box-sizing: border-box;
+    overflow: hidden;
+    align-items: center;
+    display: grid;
+  }
+
+  &_back {
+    position: absolute;
+    transform: translate3d(0, -100%, 0) rotateX(0deg) rotateY(360deg);
+
+    &-hide {
+      transform: translate3d(0, -100%, 0) rotateX(0deg) rotateY(270deg);
+    }
+  }
+
+  &_down {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(270deg);
+  }
+
+  &_up {
+    transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(360deg);
+    transition-delay: 200ms;
+  }
+
+  // Card stacked
+  &_stacked {
+    position: absolute;
+    top: 0;
+  }
+
+  &_stacked:nth-child(1n+0) {
+    transform: rotate(-1.50deg) translate3d(0.50%, -2.85%, 0);
+  }
+
+  &_stacked:nth-child(2n+0) {
+    transform: rotate(2.50deg) translate3d(0.30%, -1.85%, 0);
+  }
+
+  &_stacked:nth-child(3n+0) {
+    transform: rotate(-2.50deg) translate3d(0.30%, -1.85%, 0);
+  }
+
+  &_stacked:nth-child(4n+0) {
+    transform: rotate(-3.50deg) translate3d(0.30%, -1.85%, 0);
+  }
+
+  // Card lay animation
+  &_lay {
+    opacity: 0;
+    transform: scale(1.3);
+  }
+}
+
+//Score board
+.scoreboard {
+  opacity: 1;
+  position: absolute;
+  bottom: 0px;
+  width: -webkit-fill-available;
+  margin: 0px 0px 0px -60px;
+  padding: 25px;
+  text-align: center;
+  background: #031246;
+  border-radius: 0px 0px 20px 20px;
+  display: flex;
+  font-size: 22px;
+  font-weight: bold;
+  opacity: 0;
+  transition: $opacityTransition;
+
+  &__score {
+    background: #2b335c;
+    padding: 12px 0px;
+    border-radius: 10px;
+    width: 50%;
+    margin-right: 5px;
+  }
+
+  &__lives {
+    background: #2b335c;
+    padding: 12px 0px;
+    border-radius: 10px;
+    width: 50%;
+    margin-left: 5px;
+  }
+
+  &__item {
+    font-size: 1.3em;
+    display: inline-block;
+    padding-left: 4%;
+
+    &_changed {
+      animation: pulsate 250ms cubic-bezier(0.45, 0.03, 0.51, 0.95);
+    }
+  }
+
+  &__icon {
+    height: 20px;
+  }
+
+
+}
+
+@keyframes pulsate {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.75);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+//controls
+
+.controls {
+  margin: 5% 0 7%;
+  position: relative;
+
+
+  &__label {
+    display: block;
+    width: 100%;
+    line-height: 1;
+    font-size: 16px;
+    text-align: center;
+
+    @media #{$mqLandscape} {
+      & {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__wrapper {
+    opacity: 0;
+    visibility: hidden;
+    transition: $opacityTransition;
+  }
+
+  &__btn {
+    font-size: 22px;
+    appearance: none;
+    outline: none;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: #fff;
+    font-weight: bold;
+    line-height: 1.75;
+    width: 48%;
+    transition: $opacityTransition;
+
+    background: #ff84b7;
+    border-radius: 20px;
+    padding: 5px 25px;
+    box-shadow: 0 5px 15px rgb(255 186 235 / 40%);
+    margin-top: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &[disabled][data-disabled] {
+      opacity: 0.25;
+      cursor: default;
+    }
+
+    &-label {
+      padding: 0.5% 0 1%;
+      display: block;
+      transition: $opacityTransition, transform 100ms ease-out;
+      pointer-events: none;
+    }
+
+    &:active:not([data-disabled="1"]) .controls__btn-label {
+      transform: scale(0.9);
+    }
+
+    &-wrapper {
+      display: flex;
+      justify-content: space-between;
+      margin: 5% 0 0;
+    }
+
+    // Start button modifier
+    &_start {
+      z-index: 99;
+      background: #ff84b7;
+      box-shadow: 0 5px 15px rgb(255 186 235 / 40%);
+      border-radius: 50px;
+      border: 0px solid;
+      width: 100%;
+      opacity: 1;
+      transition: $opacityTransition;
+
+      @media #{$mqLandscape} {
+        & {
+          bottom: 75%;
+        }
+      }
+    }
+
+    // Replay button modifier
+    &_replay {
+      margin-top: 3%;
+      max-width: 15rem;
+
+      @media #{$mqLandscape} {
+        margin-top: 1%;
+      }
+    }
+  }
+}
+
+//Game Over
+.game-over {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10% 0;
+  box-sizing: border-box;
+
+  @media #{$mqLandscape} {
+    & {
+      max-width: 100%;
+    }
+  }
+
+  &__header {
+    font-size: 36px;
+    margin: 0 0 3%;
+
+    @media #{$mqLandscape} {
+      margin: 0 0 1%;
+    }
+  }
+
+  &__info {
+    font-size: 24px;
+    margin: 0 0 3%;
+
+    @media #{$mqLandscape} {
+      margin: 0 0 1%;
+    }
+
+    &_digit {
+      font-size: 1.3em;
+    }
+  }
+}
+
+
+
+
+

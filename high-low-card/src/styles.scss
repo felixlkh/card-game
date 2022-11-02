@@ -1,0 +1,55 @@
+/* You can add global styles to this file, and also import other style files */
+// SASS variables
+$systemfonts: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$opacityTransition: opacity 200ms;
+$mqSmall: "all and (max-height: 530px)";
+
+
+@media #{$mqSmall} {
+  html {
+    font-size: 2.75vh;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  color: #fff;
+}
+
+body {
+  font-family: $systemfonts;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(-45deg, #d5d5d5, #a8a8a8, #85898d, #000000);
+  background-size: 400% 400%;
+  -webkit-animation: gradient 5s ease infinite;
+  animation: gradient 5s ease infinite;
+  padding: 0.5rem 5%;
+  box-sizing: border-box;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

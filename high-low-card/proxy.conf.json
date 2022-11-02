@@ -1,0 +1,8 @@
+{
+  "/json": {
+    "target": "https://higherorlower-api.netlify.app",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

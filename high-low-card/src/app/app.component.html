@@ -1,0 +1,58 @@
+<div class="page-wrapper" [style.background]="setting==undefined?'':setting.background_color">
+  <div id="title">{{setting != undefined ? setting.text_title : "Card Game"}}</div>
+
+  <div id="deck-wrapper" class="deck-wrapper" [hidden]="gameover">
+    <div id="first-card" class="card card_down">
+      <div class="card__wrapper">
+        <div class="card__face">
+          <img src="/assets/playing_cards/{{firstCard==undefined?'': firstCard.value+'_of_'+firstCard.suit+'.svg'}}"/>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let card of Cards" class="card card_stacked">
+      <div class="card__wrapper">
+        <div class="card__face">
+          <img src="/assets/playing_cards/{{card.value+'_of_'+card.suit+'.svg'}}"/></div>
+      </div>
+    </div>
+
+    <div id="back" class="card card_back">
+      <div class="card__wrapper">
+        <div class="card__face"><img src="/assets/playing_cards/back.png"/></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="controls" class="controls">
+    <div id="controls__wrapper" class="controls__wrapper">
+      <div class="controls__btn-wrapper">
+        <button class="controls__btn" type="button" data-btn-type="-" (click)="guessChecking($event)">
+          <span class="controls__btn-label">{{setting == undefined ? "Lower" : setting.text_lower}}</span>
+        </button>
+        <button class="controls__btn" type="button" data-btn-type="+" (click)="guessChecking($event)">
+          <span class="controls__btn-label">{{setting == undefined ? "Higher" : setting.text_higher}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <button (click)="start()" id="start" style="" class="controls__btn controls__btn_start"
+          [style.background]="setting==undefined?'':setting.btn_color">
+    <span class="controls__btn-label">{{setting == undefined ? "Play" : setting.text_play}}</span>
+  </button>
+  <div id="scoreboard" class="scoreboard">
+    <div class="scoreboard__score"><img class="scoreboard__icon" src="./assets/images/score.svg"> <span
+      class="scoreboard__item" id="score">0</span></div>
+    <div class="scoreboard__lives"><img class="scoreboard__icon" src="./assets/images/heart.svg"> <span
+      class="scoreboard__item" id="lives">3</span></div>
+  </div>
+</div>
+
+<div id="game-over" class="game-over" *ngIf="gameover">
+  <div class="game-over__header">Game over!</div>
+  <div class="game-over__info">
+    You score is <span class="game-over__info_digit">{{score}}</span>
+  </div>
+  <button (click)="restart()" id="replay" class="controls__btn controls__btn_replay" type="button">
+    <span class="controls__btn-label">{{setting == undefined ? "Replay" : setting.text_replay}}</span>
+  </button>
+</div>
