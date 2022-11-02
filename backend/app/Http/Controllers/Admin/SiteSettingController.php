@@ -100,5 +100,18 @@ class SiteSettingController extends Controller
         //
     }
 
+    /**
+     * Api for the Game
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setting()
+    {
+        $siteSetting = SiteSetting::first();
+        return response()->json([
+            'data' => $siteSetting,
+            'status' => true
+        ], 200);
+
+    }
 
 }
