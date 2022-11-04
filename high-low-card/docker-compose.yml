@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+
+  example:
+    container_name: card-angular
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '.:/project'
+      - '/project/node_modules'
+    ports:
+      - '4201:4200'
